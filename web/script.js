@@ -17,19 +17,20 @@ const winningCombinations = [
     [2, 4, 6]
 ];
 
-// Add click event to all 9 cells
-cells.forEach(cell => {
-    cell.addEventListener("click", cellClicked);
+/* Connect each visible cell to its position */
+cells.forEach((cell, index) => {
+
+    cell.addEventListener("click", function () {
+        cellClicked(index);
+    });
+
 });
 
-// Add click event to restart button
 restartButton.addEventListener("click", restartGame);
 
 
-// When a cell is clicked
-function cellClicked() {
-
-    const index = this.getAttribute("data-index");
+/* When a cell is clicked */
+function cellClicked(index) {
 
     // Don't allow clicking an already filled cell
     // or clicking after the game has ended
@@ -37,19 +38,20 @@ function cellClicked() {
         return;
     }
 
-    // Put X or O in the board
+    // Put X or O in the correct position
     board[index] = currentPlayer;
-    this.textContent = currentPlayer;
 
-    // Check whether the game has ended
+    // Display X or O in the clicked cell
+    cells[index].textContent = currentPlayer;
+
     checkResult();
 }
 
 
-// Check winner or draw
+/* Check winner or draw */
 function checkResult() {
 
-    // Check all winning combinations
+    // Check for a winner
     for (let combination of winningCombinations) {
 
         const first = combination[0];
@@ -72,8 +74,10 @@ function checkResult() {
     }
 
     // Check for draw
-    // The game is a draw ONLY when all 9 cells are filled
-    if (board.every(cell => cell !== "")) {
+    // Only happens when ALL 9 positions are filled
+    const isDraw = board.every(cell => cell !== "");
+
+    if (isDraw) {
 
         statusText.textContent = "🤝 It's a draw!";
 
@@ -90,7 +94,7 @@ function checkResult() {
 }
 
 
-// Restart the game
+/* Restart game */
 function restartGame() {
 
     board = ["", "", "", "", "", "", "", ""];
