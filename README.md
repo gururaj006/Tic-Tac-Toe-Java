@@ -2,6 +2,10 @@
 
 A simple two-player Tic-Tac-Toe game developed using Java.
 
+## 🎮 Play the Game
+
+👉 [Click here to play Tic-Tac-Toe](https://gururaj006.github.io/Tic-Tac-Toe-Java/web/)
+
 ## 📌 About the Project
 
 This is a console-based Tic-Tac-Toe game where two players take turns playing as X and O.
